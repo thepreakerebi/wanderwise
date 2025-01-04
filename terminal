@@ -1,0 +1,8 @@
+mkdir wanderwise
+cd wanderwise
+mkdir backend frontend
+cd backend
+npm init -y 
+npm install express express-validator mongoose dotenv cors helmet morgan jsonwebtoken bcryptjs passport passport-jwt passport-google-oauth20 @types/passport @types/passport-jwt @types/passport-google-oauth20
+npm install -D typescript @types/express @types/node @types/cors @types/morgan @types/jsonwebtoken @types/bcryptjs ts-node-dev 
+mkdir -p src/{config,controllers,models,routes,middlewares,utils,types} 
