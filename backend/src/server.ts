@@ -8,6 +8,7 @@ import { errorHandler } from './middlewares/errorHandler';
 import passport from 'passport';
 import { configurePassport } from './middlewares/authMiddleware';
 import authRoutes from './routes/authRoutes';
+import tripRoutes from './routes/tripRoutes';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ configurePassport();
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/trips', tripRoutes);
 
 // Error handling
 app.use(errorHandler);
