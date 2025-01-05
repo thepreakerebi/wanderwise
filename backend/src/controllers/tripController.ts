@@ -17,6 +17,7 @@ export const createTrip = async (
 
     res.status(201).json({
       status: 'success',
+      message: 'New trip created',
       data: {
         trip,
       },
@@ -96,6 +97,7 @@ export const updateTrip = async (
 
     res.status(200).json({
       status: 'success',
+      message: 'Changes to trip updated',
       data: {
         trip,
       },
@@ -122,6 +124,7 @@ export const deleteTrip = async (
 
     res.status(204).json({
       status: 'success',
+      message: 'Trip deleted',
       data: null,
     });
   } catch (error) {
