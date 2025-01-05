@@ -1,15 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { check, validationResult, ValidationChain } from 'express-validator';
 
-const validateResults = (req: Request, res: Response, next: NextFunction) => {
+const validateResults: RequestHandler = (req, res, next): void => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    res.status(400).json({ errors: errors.array() });
+    return;
   }
   next();
 };
 
-export const validateRegistration: (ValidationChain | ((req: Request, res: Response, next: NextFunction) => void))[] = [
+export const validateRegistration: RequestHandler[] = [
   check('email').isEmail().withMessage('Please provide a valid email'),
   check('password')
     .isLength({ min: 8 })
@@ -19,13 +20,13 @@ export const validateRegistration: (ValidationChain | ((req: Request, res: Respo
   validateResults,
 ];
 
-export const validateLogin: (ValidationChain | ((req: Request, res: Response, next: NextFunction) => void))[] = [
+export const validateLogin: RequestHandler[] = [
   check('email').isEmail().withMessage('Please provide a valid email'),
   check('password').notEmpty().withMessage('Password is required'),
   validateResults,
 ];
 
-export const validateTrip = [
+export const validateTrip: RequestHandler[] = [
   check('title').notEmpty().withMessage('Title is required'),
   check('startDate').isISO8601().withMessage('Valid start date is required'),
   check('endDate').isISO8601().withMessage('Valid end date is required'),
